@@ -4,6 +4,7 @@ from datetime import datetime
 import clickhouse_connect
 from confluent_kafka import Consumer, KafkaException
 
+
 KAFKA_CONFIG = {
     "bootstrap.servers": "localhost:9092",
     "group.id": "ride-clickhouse-writer",
@@ -12,6 +13,7 @@ KAFKA_CONFIG = {
 }
 
 KAFKA_TOPIC = "ride-events"
+
 
 clickhouse = clickhouse_connect.get_client(
     host="localhost",
@@ -31,7 +33,9 @@ def parse_timestamp(value):
 
 def main():
     consumer.subscribe([KAFKA_TOPIC])
-    print("Kafka-to-ClickHouse consumer started.")
+
+    print("Global Kafka-to-ClickHouse consumer started.")
+    print("Saving ride events with geographic coordinates.")
     print("Waiting for ride events. Press Ctrl+C to stop.")
 
     try:
@@ -55,6 +59,10 @@ def main():
                 float(event["estimated_distance_km"]),
                 parse_timestamp(event["request_timestamp"]),
                 event["status"],
+                event.get("city", ""),
+                event.get("country", ""),
+                float(event.get("latitude", 0)),
+                float(event.get("longitude", 0)),
             ]
 
             clickhouse.insert(
@@ -69,14 +77,25 @@ def main():
                     "estimated_distance_km",
                     "event_timestamp",
                     "status",
+                    "city",
+                    "country",
+                    "latitude",
+                    "longitude",
                 ],
             )
 
-            consumer.commit(message=message, asynchronous=False)
+            consumer.commit(
+                message=message,
+                asynchronous=False
+            )
 
             print(
-                f"Saved ride {event['ride_id']} "
-                f"to ClickHouse successfully."
+                f"Saved ride {event['ride_id']} | "
+                f"{event.get('city', 'Unknown City')}, "
+                f"{event.get('country', 'Unknown Country')} | "
+                f"Coordinates: "
+                f"{event.get('latitude', 0)}, "
+                f"{event.get('longitude', 0)}"
             )
 
     except KeyboardInterrupt:

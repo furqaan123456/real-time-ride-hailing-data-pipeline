@@ -30,7 +30,9 @@ data/*.parquet
 .idea/
 .DS_Store
 Thumbs.db
-
 # Temporary files
 *.tmp
 *.bak
+
+# Backup scripts
+backup/

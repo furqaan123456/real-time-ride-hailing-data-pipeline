@@ -122,15 +122,19 @@ Additional documentation, automated tests, and performance measurements will be 
 
 ### Apache Flink Dashboard
 
-Apache Flink is responsible for real-time stream processing, event-time operations, watermark handling, and one-minute window aggregations.
+### Global Live Ride-Hailing Dashboard
 
-![Apache Flink Dashboard](images/flink-dashboard.png)
+The global monitoring dashboard displays real-time ride activity across 14 cities and 6 countries.
 
-### Grafana Analytics Dashboard
+Features:
+- Global Live Ride Map
+- Total Global Rides
+- Active Cities
+- Active Countries
+- Valid GPS Coordinates
+- Real-time ride analytics
 
-Grafana visualizes real-time ride activity and aggregated pickup-zone analytics using ClickHouse.
-
-![Grafana Dashboard](images/grafana-dashboard.png)
+![Global Live Ride-Hailing Dashboard](images/global-live-dashboard.png)
 ## Future Improvements
 
 - Add automated unit and integration tests.
