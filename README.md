@@ -118,7 +118,19 @@ The end-to-end streaming pipeline has been implemented and functionally tested.
 The simulator, Kafka consumers, Flink processing job, ClickHouse storage, and Grafana dashboard have been integrated.
 
 Additional documentation, automated tests, and performance measurements will be added as the project develops.
+## Live Monitoring Dashboards
 
+### Apache Flink Dashboard
+
+Apache Flink is responsible for real-time stream processing, event-time operations, watermark handling, and one-minute window aggregations.
+
+![Apache Flink Dashboard](images/flink-dashboard.png)
+
+### Grafana Analytics Dashboard
+
+Grafana visualizes real-time ride activity and aggregated pickup-zone analytics using ClickHouse.
+
+![Grafana Dashboard](images/grafana-dashboard.png)
 ## Future Improvements
 
 - Add automated unit and integration tests.
