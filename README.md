@@ -104,6 +104,13 @@ real-time-ride-hailing-data-pipeline/
 - ClickHouse analytical storage
 - Grafana real-time dashboard
 
+## Grafana Real-Time Dashboard
+
+The project includes a Grafana dashboard connected to ClickHouse for real-time ride-hailing analytics.
+
+The dashboard visualizes ride activity, pickup-zone distribution, and Flink streaming analytics.
+
+![Real-Time Ride-Hailing Grafana Dashboard](images/grafana-dashboard.png)
 ## Project Status
 
 The end-to-end streaming pipeline has been implemented and functionally tested.
